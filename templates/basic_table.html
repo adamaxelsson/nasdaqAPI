@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>Country</th>
+        <th>Number Of Available Companies</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for country in countries %}
+        <tr>
+          <td><a href="{{ url_for('available_stocks', country=country[0], data=country[1][1]) }}" >{{ country[0] }}</a></th>
+          <td>{{ country[1][0] }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
+
+{% block scripts %}
+  <script>
+    $(document).ready(function () {
+      $('#data').DataTable({
+        columns: [
+          null,
+          {searchable: false},
+          {orderable: false, searchable: false},
+          {orderable: false, searchable: false},
+          null],
+      });
+    });
+  </script>
+{% endblock %}
